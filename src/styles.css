@@ -15,7 +15,6 @@
   --jade-felt: #7fd9a3;
   --indigo: #2f5d9e;
   --bamboo: #c9a45c;
-  --bamboo-top: #d6b471;
   --bamboo-deep: #8f7336;
   --font-display: 'Young Serif', Georgia, 'Times New Roman', serif, 'Noto Serif TC';
   --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif, 'Noto Serif TC';
@@ -232,88 +231,23 @@ a {
   color: var(--lacquer-felt);
 }
 
-/* Tiles */
+/* Tiles. The faces come from the sprite in public/tiles.svg; states are shown by the ring drawn over each tile. */
 
 .tile-svg {
   display: block;
   overflow: visible;
 }
 
-.tile-bone {
-  fill: var(--bone);
-  stroke: var(--bone-edge);
-  stroke-width: 1;
-}
-
-.tile-edge {
-  fill: var(--bone-shade);
-}
-
-.tile-back-face {
-  fill: var(--bamboo);
-  stroke: var(--bamboo-deep);
-  stroke-width: 1;
-}
-
-.tile-back-edge {
-  fill: var(--bamboo-deep);
-}
-
-.tile-grain {
-  stroke: var(--bamboo-deep);
-  stroke-width: 1.2;
-  opacity: 0.45;
-}
-
-.ink-ink {
-  color: var(--ink);
-}
-
-.ink-red {
-  color: var(--lacquer);
-}
-
-.ink-green {
-  color: var(--jade);
-}
-
-.ink-blue {
-  color: var(--indigo);
-}
-
-.ink-fill {
-  fill: currentColor;
-}
-
-.ink-line {
+.tile-ring {
   fill: none;
-  stroke: currentColor;
+  stroke: none;
+  pointer-events: none;
 }
 
-.bone-fill {
+.tile-hint-bg {
   fill: var(--bone);
-}
-
-.bone-line {
-  fill: none;
-  stroke: var(--bone);
-  stroke-width: 1.6;
-}
-
-.tile-cjk {
-  font-family: var(--font-cjk);
-  font-weight: 900;
-  text-anchor: middle;
-  dominant-baseline: central;
-  fill: currentColor;
-}
-
-.tile-num {
-  font-family: var(--font-body);
-  font-weight: 700;
-  text-anchor: middle;
-  dominant-baseline: central;
-  fill: currentColor;
+  stroke: var(--bone-shade);
+  stroke-width: 0.6;
 }
 
 .tile-hint {
@@ -386,7 +320,7 @@ a {
   width: 46px;
 }
 
-.tile-btn-correct .tile-bone {
+.tile-btn-correct .tile-ring {
   stroke: var(--jade);
   stroke-width: 3;
 }
@@ -395,7 +329,7 @@ a {
   opacity: 0.5;
 }
 
-.tile-btn-wrong .tile-bone {
+.tile-btn-wrong .tile-ring {
   stroke: var(--lacquer);
   stroke-width: 3;
 }
@@ -527,14 +461,15 @@ a {
   transform-origin: 0 0;
 }
 
-.hand-tile-correct .tile-bone {
+.hand-tile-correct .tile-ring {
   stroke: var(--jade);
   stroke-width: 3;
 }
 
-.hand-tile-open .tile-bone {
-  stroke: var(--bone-shade);
-  stroke-width: 2;
+/* Claimed sets lie on the table: a wood-coloured frame sets them apart from the concealed tiles. */
+.hand-tile-open .tile-ring {
+  stroke: var(--bamboo);
+  stroke-width: 2.5;
 }
 
 .hand-label line {
@@ -576,8 +511,9 @@ a {
   transform-origin: 0 0;
 }
 
-.tt-tile-top .tile-back-face {
-  fill: var(--bamboo-top);
+/* The upper tile of each wall stack is lifted a touch so the two layers read as a stack. */
+.tt-tile-top .tile-ring {
+  fill: rgba(243, 234, 211, 0.22);
 }
 
 .tt-seat {
@@ -1142,6 +1078,15 @@ a {
 .footer p {
   margin: 0;
   max-width: 70ch;
+}
+
+.footer-credit {
+  margin-top: 10px !important;
+  font-size: 14px;
+}
+
+.footer-credit a {
+  color: var(--bone-dim);
 }
 
 /* Small screens */

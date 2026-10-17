@@ -12,19 +12,10 @@ describe('Tile', () => {
     }
   })
 
-  it('draws the Chinese numeral and 萬 on characters tiles', () => {
+  it('draws each face from the classic sprite by tile id', () => {
     const { container } = render(<Tile id="C7" />)
-    const texts = [...container.querySelectorAll('text')].map((t) => t.textContent)
-    expect(texts).toContain('七')
-    expect(texts).toContain('萬')
-  })
-
-  it('draws nine sticks on the nine of bamboo and a bird on the one', () => {
-    const nine = render(<Tile id="B9" />)
-    expect(nine.container.querySelectorAll('rect.ink-fill')).toHaveLength(9)
-    nine.unmount()
-    const one = render(<Tile id="B1" />)
-    expect(one.container.querySelectorAll('path.ink-fill').length).toBeGreaterThan(0)
+    const use = container.querySelector('use')
+    expect(use?.getAttribute('href')).toMatch(/tiles\.svg#C7$/)
   })
 
   it('shows corner hints only when asked', () => {
@@ -33,10 +24,17 @@ describe('Tile', () => {
     plain.unmount()
     const hinted = render(<Tile id="D4" hint />)
     expect(hinted.container.querySelector('.tile-hint')?.textContent).toBe('4')
+    hinted.unmount()
+    const wind = render(<Tile id="WN" hint />)
+    expect(wind.container.querySelector('.tile-hint')?.textContent).toBe('N')
+    wind.unmount()
+    const dragon = render(<Tile id="RD" hint />)
+    expect(dragon.container.querySelector('.tile-hint')).toBeNull()
   })
 
-  it('renders a face-down back', () => {
-    render(<Tile id="D4" back />)
+  it('renders a face-down back from the sprite', () => {
+    const { container } = render(<Tile id="D4" back />)
     expect(screen.getByRole('img', { name: 'Face-down tile' })).toBeInTheDocument()
+    expect(container.querySelector('use')?.getAttribute('href')).toMatch(/tiles\.svg#BACK$/)
   })
 })

@@ -83,6 +83,13 @@ export default function App() {
           follow Hong Kong (Cantonese) rules; Riichi (Japanese), Chinese Official and American mahjong
           score differently. Where tables disagree, the lesson says which reading it uses.
         </p>
+        <p className="footer-credit">
+          Tile faces by{' '}
+          <a href="https://commons.wikimedia.org/wiki/Category:SVG_mahjong_tiles">Cangjie6, Wikimedia Commons</a>,{' '}
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>; see{' '}
+          <a href="https://github.com/francisphan/sparrow/blob/main/CREDITS.md">credits</a>. Ready to play?{' '}
+          <a href="https://francisphan.github.io/pung/">Pung</a> deals a full game against three opponents.
+        </p>
       </footer>
     </div>
   )
