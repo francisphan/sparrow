@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { metricsEnabled, track } from './metrics'
 import Glossary from './sections/Glossary'
 import Round from './sections/Round'
 import Scoring from './sections/Scoring'
@@ -28,6 +29,11 @@ export default function App() {
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
+
+  // Which lessons get read.
+  useEffect(() => {
+    track(`lesson/${tab}`, TABS.find((t) => t.id === tab)?.label)
+  }, [tab])
 
   function go(t: Tab) {
     setTab(t)
@@ -90,6 +96,12 @@ export default function App() {
           <a href="https://github.com/francisphan/sparrow/blob/main/CREDITS.md">credits</a>. Ready to play?{' '}
           <a href="https://francisphan.github.io/pung/">Pung</a> deals a full game against three opponents.
         </p>
+        {metricsEnabled() && (
+          <p className="footer-credit">
+            Visits and quiz answers are counted anonymously by <a href="https://www.goatcounter.com/">GoatCounter</a>,
+            without cookies.
+          </p>
+        )}
       </footer>
     </div>
   )

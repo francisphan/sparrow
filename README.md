@@ -23,6 +23,10 @@ The data model is variant-agnostic: tiles, melds and hands live in `src/data/`, 
 
 The page is the table: deep felt green, with bone tiles as the only raised surfaces. The tile faces are Cangjie6's classic set from Wikimedia Commons (CC BY-SA 4.0, see `CREDITS.md`), served as one SVG sprite in `public/tiles.svg`. The sprite is built in the [Pung](https://github.com/francisphan/pung) repository (`npm run tiles` there) and copied here; corner hints and the rings that mark a picked, correct, wrong or claimed tile are drawn over it in code. Lacquer red is the current thing (active tab, primary action, 中 and 萬), jade is the green dragon and a correct answer, indigo frames the white dragon. Young Serif for headings, Atkinson Hyperlegible for text, and a Noto Serif TC subset for the characters on the tiles. The subset is generated from every Chinese character in `src/`, and a test fails if one is missing from `index.html`.
 
+## Metrics
+
+Set the repository variable `SPARROW_GOATCOUNTER` to a [GoatCounter](https://www.goatcounter.com/) site, such as `https://sparrow.goatcounter.com`, and the build loads its script: page views plus a few named events (`lesson/tiles` and the other lessons, `quiz/tile/right` and `wrong`, `quiz/wait/right` and `wrong`, `quiz/score/right` and `wrong`; the list is in `src/metrics.ts`). GoatCounter sets no cookies and keeps no personal data, so there is no banner, and it skips localhost by itself. Without the variable nothing is loaded or counted.
+
 ## Develop
 
 ```bash

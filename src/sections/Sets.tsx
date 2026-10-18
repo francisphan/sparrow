@@ -6,6 +6,7 @@ import Tile from '../components/Tile'
 import { decompose, findWaits, type Meld } from '../data/hand'
 import { ANATOMY_HAND, MELD_EXAMPLES, WAIT_PUZZLES } from '../data/hands'
 import { sortTiles, tileName, tileOrder, type StandardId } from '../data/tiles'
+import { track } from '../metrics'
 
 const KIND_LABEL: Record<Meld['kind'], string> = { chow: 'chow', pung: 'pung', kong: 'kong', pair: 'pair' }
 
@@ -84,6 +85,7 @@ function WaitPuzzle() {
     if (tried.includes(t)) return
     setTried((x) => [...x, t])
     setRevealed(null)
+    track(waits.includes(t) ? 'quiz/wait/right' : 'quiz/wait/wrong', puzzle.id)
   }
 
   let tiles: HandTile[]

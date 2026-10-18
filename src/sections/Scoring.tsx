@@ -5,6 +5,7 @@ import Term from '../components/Term'
 import { SCORING_EXAMPLES } from '../data/hands'
 import { LIMIT_FAAN, MINIMUM_FAAN, PATTERNS, scoreHand, type PatternId } from '../data/scoring/hongkong'
 import { sortTiles, tileName } from '../data/tiles'
+import { track } from '../metrics'
 
 const WIND_NAME = { east: 'East', south: 'South', west: 'West', north: 'North' } as const
 
@@ -99,7 +100,15 @@ function ScoreDrill() {
             </span>
           )}
         </p>
-        <button type="button" className="btn" onClick={() => setChecked(true)} disabled={checked}>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            setChecked(true)
+            track(missed.length === 0 && extra.length === 0 ? 'quiz/score/right' : 'quiz/score/wrong', ex.id)
+          }}
+          disabled={checked}
+        >
           Check my count
         </button>
       </div>

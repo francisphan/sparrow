@@ -3,6 +3,7 @@ import FloatTip from '../components/FloatTip'
 import Term from '../components/Term'
 import Tile from '../components/Tile'
 import { makeQuestion, type Question } from '../data/quiz'
+import { track } from '../metrics'
 import {
   CHINESE_NUMERAL,
   TILE_BY_ID,
@@ -81,6 +82,7 @@ export default function Tiles() {
     setPicked(id)
     const ok = id === q.tile
     setScore((s) => ({ right: s.right + (ok ? 1 : 0), total: s.total + 1, streak: ok ? s.streak + 1 : 0 }))
+    track(ok ? 'quiz/tile/right' : 'quiz/tile/wrong', q.tile)
   }
   function next() {
     setQ(makeQuestion(Math.random, q.tile))
