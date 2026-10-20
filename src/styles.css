@@ -29,10 +29,18 @@
 html {
   background: var(--felt);
   color: var(--bone);
+  color-scheme: dark;
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--bone-dim) var(--felt-deep);
+}
+
+/* The parts the browser draws carry the felt's colours too. */
+::selection {
+  background: var(--bamboo);
+  color: var(--ink);
 }
 
 body {
@@ -83,18 +91,6 @@ a {
 .tagline {
   margin: 8px 0 0;
   color: var(--bone-dim);
-}
-
-.masthead-link {
-  color: var(--bone-dim);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  white-space: nowrap;
-}
-
-.masthead-link:hover {
-  color: var(--bone);
 }
 
 /* Tabs, drawn as a short row of tiles */
@@ -642,6 +638,12 @@ a {
 
 /* Panel typography */
 
+.panel h2,
+.panel h3,
+.wordmark {
+  text-wrap: balance;
+}
+
 .panel h2 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -771,7 +773,6 @@ a {
 .tile-btn:focus-visible,
 .quiz-opt:focus-visible,
 .term:focus-visible,
-.masthead-link:focus-visible,
 .check input:focus-visible,
 .pattern input:focus-visible {
   outline: 3px solid var(--bone);
