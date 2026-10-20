@@ -177,7 +177,7 @@ export const RARE_HANDS: readonly RareHand[] = [
   },
   { name: 'Four kongs', chinese: '十八羅漢', faan: 'limit', description: 'Four kongs and a pair.' },
   { name: 'Heavenly hand', chinese: '天糊', faan: 'limit', description: 'The dealer wins on the deal.' },
-  { name: 'Earthly hand', chinese: '地糊', faan: 'limit', description: "A win on the dealer's first discard." },
+  { name: 'Earthly hand', chinese: '地糊', faan: 'limit', description: 'A win on the dealer’s first discard.' },
 ]
 
 export interface ScoredPattern {

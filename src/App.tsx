@@ -42,6 +42,9 @@ export default function App() {
 
   return (
     <div className="app">
+      <a className="skip-link" href="#main">
+        Skip to the lesson
+      </a>
       <header className="masthead">
         <div>
           <h1 className="wordmark">
@@ -72,7 +75,7 @@ export default function App() {
         ))}
       </nav>
 
-      <main>
+      <main id="main" tabIndex={-1}>
         {tab === 'tiles' && <Tiles />}
         {tab === 'sets' && <Sets />}
         {tab === 'round' && <Round />}

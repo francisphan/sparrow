@@ -732,6 +732,41 @@ a {
 
 /* Buttons */
 
+/* Keyboard users jump past the masthead and tabs; the link shows only while focused. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--bone);
+  color: var(--ink);
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline: 3px solid var(--lacquer);
+  outline-offset: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.btn,
+.tab,
+.seg-btn,
+.step,
+.tile-btn,
+.quiz-opt,
+.term,
+.pattern {
+  touch-action: manipulation;
+}
+
 .btn {
   font-family: var(--font-body);
   font-weight: 700;
