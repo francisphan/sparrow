@@ -119,7 +119,7 @@ function ScoreDrill() {
 
 export default function Scoring() {
   return (
-    <section className="lesson" aria-labelledby="scoring-title">
+    <section className="lesson lesson-drill" aria-labelledby="scoring-title">
       <div className="stage">
         <ScoreDrill />
       </div>

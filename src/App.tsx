@@ -52,9 +52,6 @@ export default function App() {
           </h1>
           <p className="tagline">Mahjong for people who have never seen a tile.</p>
         </div>
-        <a className="masthead-link" href="https://github.com/francisphan/sparrow">
-          Source on GitHub
-        </a>
       </header>
 
       <nav className="tabs" role="tablist" aria-label="Lessons">
@@ -93,7 +90,8 @@ export default function App() {
           Tile faces by{' '}
           <a href="https://commons.wikimedia.org/wiki/Category:SVG_mahjong_tiles">Cangjie6, Wikimedia Commons</a>,{' '}
           <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>; see{' '}
-          <a href="https://github.com/francisphan/sparrow/blob/main/CREDITS.md">credits</a>. Ready to play?{' '}
+          <a href="https://github.com/francisphan/sparrow/blob/main/CREDITS.md">credits</a>.{' '}
+          <a href="https://github.com/francisphan/sparrow">Source on GitHub</a>. Ready to play?{' '}
           <a href="https://francisphan.github.io/pung/">Pung</a> deals a full game against three opponents.
         </p>
         {metricsEnabled() && (

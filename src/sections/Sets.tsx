@@ -166,7 +166,7 @@ function WaitPuzzle() {
 
 export default function Sets() {
   return (
-    <section className="lesson" aria-labelledby="sets-title">
+    <section className="lesson lesson-drill" aria-labelledby="sets-title">
       <div className="stage">
         <Anatomy />
         <h3 className="stage-heading">Find the wait</h3>
