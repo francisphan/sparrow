@@ -116,6 +116,70 @@ export const MINIMUM_FAAN = 3
 /** Most tables cap a hand at 13 faan; some at 10. */
 export const LIMIT_FAAN = 13
 
+export interface RareHand {
+  name: string
+  chinese: string
+  /** A fixed value, or the limit itself. */
+  faan: number | 'limit'
+  description: string
+}
+
+/**
+ * The named hands, worth a fixed amount instead of a count. Listed for the
+ * lesson; the drill above scores only the common patterns.
+ */
+export const RARE_HANDS: readonly RareHand[] = [
+  {
+    name: 'Little three dragons',
+    chinese: '小三元',
+    faan: 5,
+    description: 'Two dragon pungs and a pair of the third dragon: three for the shape, plus one for each pung.',
+  },
+  {
+    name: 'Jade dragon',
+    chinese: '翡翠龍',
+    faan: 10,
+    description: 'Three pungs of bamboo, a pung of the green dragon and a pair of bamboo.',
+  },
+  {
+    name: 'Ruby dragon',
+    chinese: '紅寶石龍',
+    faan: 10,
+    description: 'Three pungs of characters, a pung of the red dragon and a pair of characters.',
+  },
+  {
+    name: 'Pearl dragon',
+    chinese: '珍珠龍',
+    faan: 10,
+    description: 'Three pungs of dots, a pung of the white dragon and a pair of dots.',
+  },
+  { name: 'Big three dragons', chinese: '大三元', faan: 'limit', description: 'Pungs of all three dragons.' },
+  {
+    name: 'Little four winds',
+    chinese: '小四喜',
+    faan: 'limit',
+    description: 'Pungs of three winds and a pair of the fourth.',
+  },
+  { name: 'Big four winds', chinese: '大四喜', faan: 'limit', description: 'Pungs of all four winds.' },
+  { name: 'All honors', chinese: '字一色', faan: 'limit', description: 'Nothing but winds and dragons.' },
+  { name: 'All terminals', chinese: '清么九', faan: 'limit', description: 'Nothing but ones and nines.' },
+  {
+    name: 'Thirteen orphans',
+    chinese: '十三么',
+    faan: 'limit',
+    description: 'One of each one, nine, wind and dragon, plus a second copy of any of them.',
+  },
+  {
+    name: 'Nine gates',
+    chinese: '九蓮寶燈',
+    faan: 'limit',
+    description: '1112345678999 of one suit, concealed, plus any tile of that suit.',
+  },
+  { name: 'Four kongs', chinese: '十八羅漢', faan: 'limit', description: 'Four kongs and a pair.' },
+  { name: 'Heavenly hand', chinese: '天糊', faan: 'limit', description: 'The dealer wins on the deal.' },
+  { name: 'Earthly hand', chinese: '地糊', faan: 'limit', description: "A win on the dealer's first discard." },
+]
+
 export interface ScoredPattern {
   id: PatternId
   faan: number

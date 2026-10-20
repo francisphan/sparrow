@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { parseTiles, type StandardId } from '../tiles'
 import type { Hand } from '../hand'
-import { MINIMUM_FAAN, PATTERNS, scoreHand, type WinContext } from './hongkong'
+import { LIMIT_FAAN, MINIMUM_FAAN, PATTERNS, RARE_HANDS, scoreHand, type WinContext } from './hongkong'
 import { SCORING_EXAMPLES } from '../hands'
 
 const ids = (s: string) => parseTiles(s) as StandardId[]
@@ -100,5 +100,17 @@ describe('Hong Kong scoring', () => {
 
   it('lists every pattern with a positive faan value', () => {
     for (const p of PATTERNS) expect(p.faan).toBeGreaterThan(0)
+  })
+
+  it('lists the rare hands with the dragon hands at ten and the rest at or under the limit', () => {
+    const names = RARE_HANDS.map((h) => h.name)
+    expect(new Set(names).size).toBe(names.length)
+    for (const h of RARE_HANDS) {
+      expect(h.chinese.length, h.name).toBeGreaterThan(0)
+      if (h.faan !== 'limit') expect(h.faan, h.name).toBeLessThan(LIMIT_FAAN)
+    }
+    for (const name of ['Jade dragon', 'Ruby dragon', 'Pearl dragon']) {
+      expect(RARE_HANDS.find((h) => h.name === name)?.faan, name).toBe(10)
+    }
   })
 })

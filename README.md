@@ -9,7 +9,7 @@ Live: https://francisphan.github.io/sparrow/
 1. **The tiles.** All 144 tiles with the classic faces found on most sets: three suits (characters, dots, bamboo) one to nine, four winds, three dragons, flowers and seasons. Hover, tap or tab to any tile to read it, then try "Name that tile" with instant feedback.
 2. **Sets and a winning hand.** Chow, pung, kong and the pair, and the goal of four sets plus a pair. Flip a hand between sorted and grouped to see the sets slide into place, then find the wait in four ready hands, including nine gates.
 3. **How a round flows.** Seats and winds, the wall, the deal, draw and discard, calling a discard, and what happens when two players want the same tile. A 13-step animated table with all 144 tiles.
-4. **Scoring basics.** Faan counting in Hong Kong rules: all chows, all pungs, mixed and pure one suit, dragon and wind pungs, self-draw, concealed hand, the minimum and the limit. Score six pre-built hands and check your count.
+4. **Scoring basics.** Faan counting in Hong Kong rules: all chows, all pungs, mixed and pure one suit, dragon and wind pungs, self-draw, concealed hand, the minimum and the limit, plus a table of the rare named hands (the jade, ruby and pearl dragons at ten faan, and the limit hands). Score six pre-built hands and check your count.
 
 Plus a glossary, reachable from the dotted words in every lesson.
 

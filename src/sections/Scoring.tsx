@@ -3,7 +3,7 @@ import HandRow, { type HandLabel, type HandTile } from '../components/HandRow'
 import Segmented from '../components/Segmented'
 import Term from '../components/Term'
 import { SCORING_EXAMPLES } from '../data/hands'
-import { LIMIT_FAAN, MINIMUM_FAAN, PATTERNS, scoreHand, type PatternId } from '../data/scoring/hongkong'
+import { LIMIT_FAAN, MINIMUM_FAAN, PATTERNS, RARE_HANDS, scoreHand, type PatternId } from '../data/scoring/hongkong'
 import { sortTiles, tileName } from '../data/tiles'
 import { track } from '../metrics'
 
@@ -171,10 +171,36 @@ export default function Scoring() {
           four sets and a pair but no faan at all is a <Term id="chicken">chicken hand</Term>.
         </p>
         <p>
-          At the top, hands are capped at a limit, usually {LIMIT_FAAN} faan. A few rare hands go straight to
-          the limit: all honors, big three dragons (pungs of all three), big four winds, and nine gates from the
-          wait puzzle.
+          At the top, hands are capped at a limit, usually {LIMIT_FAAN} faan. The patterns above still add up
+          as normal: a self-drawn, concealed pure one suit is nine.
         </p>
+
+        <h3>The rare hands</h3>
+        <p>
+          A few hands have a name and a fixed value instead of a count. The three dragon hands are worth ten on
+          their own, standing in for all pungs, one suit and the dragon pung. The rest go straight to the
+          limit. You will see them once in a long while, so learn to recognise them rather than to chase them.
+        </p>
+        <table className="faan-table">
+          <thead>
+            <tr>
+              <th scope="col">Hand</th>
+              <th scope="col">Faan</th>
+              <th scope="col">What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            {RARE_HANDS.map((h) => (
+              <tr key={h.name}>
+                <th scope="row">
+                  {h.name} <span className="pattern-cjk" lang="zh-Hant">{h.chinese}</span>
+                </th>
+                <td>{h.faan === 'limit' ? 'limit' : h.faan}</td>
+                <td>{h.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
         <h3>Flowers and seasons</h3>
         <p>
