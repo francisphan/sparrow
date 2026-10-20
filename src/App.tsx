@@ -16,29 +16,31 @@ const TABS: { id: Tab; label: string; mark: string }[] = [
   { id: 'glossary', label: 'Glossary', mark: '字' },
 ]
 
+/** The lesson named in the address; a glossary entry (#term-chow) opens the glossary. */
 function tabFromHash(): Tab {
   const h = window.location.hash.replace('#', '')
+  if (h.startsWith('term-')) return 'glossary'
   return TABS.some((t) => t.id === h) ? (h as Tab) : 'tiles'
 }
 
 export default function App() {
   const [tab, setTab] = useState<Tab>(tabFromHash)
 
+  // The lesson links are plain hash links, so the browser keeps the history and this just follows.
   useEffect(() => {
     const onHash = () => setTab(tabFromHash())
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  // Which lessons get read.
+  // Which lessons get read; the title and a glossary anchor follow the lesson.
   useEffect(() => {
-    track(`lesson/${tab}`, TABS.find((t) => t.id === tab)?.label)
+    const label = TABS.find((t) => t.id === tab)?.label
+    document.title = tab === 'tiles' ? 'Sparrow' : `${label} · Sparrow`
+    track(`lesson/${tab}`, label)
+    const h = window.location.hash.replace('#', '')
+    if (h.startsWith('term-')) document.getElementById(h)?.scrollIntoView()
   }, [tab])
-
-  function go(t: Tab) {
-    setTab(t)
-    window.history.replaceState(null, '', `#${t}`)
-  }
 
   return (
     <div className="app">
@@ -57,21 +59,14 @@ export default function App() {
         </div>
       </header>
 
-      <nav className="tabs" role="tablist" aria-label="Lessons">
+      <nav className="tabs" aria-label="Lessons">
         {TABS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={tab === t.id}
-            className="tab"
-            onClick={() => go(t.id)}
-          >
+          <a key={t.id} href={`#${t.id}`} className="tab" aria-current={tab === t.id ? 'page' : undefined}>
             <span className="tab-mark" aria-hidden="true">
               {t.mark}
             </span>
             <span className="tab-label">{t.label}</span>
-          </button>
+          </a>
         ))}
       </nav>
 

@@ -167,12 +167,6 @@ function WaitPuzzle() {
 export default function Sets() {
   return (
     <section className="lesson lesson-drill" aria-labelledby="sets-title">
-      <div className="stage">
-        <Anatomy />
-        <h3 className="stage-heading">Find the wait</h3>
-        <WaitPuzzle />
-      </div>
-
       <div className="panel">
         <h2 id="sets-title">Sets and a winning hand</h2>
         <p className="lede">
@@ -217,6 +211,13 @@ export default function Sets() {
           famous hand that waits on all nine tiles of a suit.
         </p>
       </div>
+
+      <div className="stage">
+        <Anatomy />
+        <h3 className="stage-heading">Find the wait</h3>
+        <WaitPuzzle />
+      </div>
+
     </section>
   )
 }

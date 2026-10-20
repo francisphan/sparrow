@@ -60,7 +60,7 @@ export const GLOSSARY: Term[] = [
     id: 'pair',
     term: 'Pair',
     chinese: '眼',
-    say: 'ngaan, "eyes"',
+    say: 'ngaan, “eyes”',
     short: 'Two identical tiles. Every winning hand has exactly one pair.',
     long: 'The pair is sometimes called the eyes. It is never claimed from a discard, except the discard that wins the hand.',
   },

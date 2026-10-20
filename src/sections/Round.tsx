@@ -10,41 +10,6 @@ export default function Round() {
 
   return (
     <section className="lesson" aria-labelledby="round-title">
-      <div className="stage">
-        <div className="stage-bar">
-          <p className="status">
-            Step {step + 1} of {FRAMES.length}: {frame.title}
-          </p>
-          <div className="stage-actions">
-            <button type="button" className="btn btn-quiet" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}>
-              Back
-            </button>
-            <button type="button" className="btn" onClick={() => setStep((s) => Math.min(last, s + 1))} disabled={step === last}>
-              Next
-            </button>
-          </div>
-        </div>
-        <Table frame={frame} />
-        <p className="phase-blurb" aria-live="polite">
-          {frame.caption}
-        </p>
-        <ol className="steps" aria-label="Steps">
-          {FRAMES.map((f, i) => (
-            <li key={f.id}>
-              <button
-                type="button"
-                className={`step${i === step ? ' step-on' : ''}`}
-                aria-current={i === step ? 'step' : undefined}
-                onClick={() => setStep(i)}
-              >
-                <small>{i + 1}</small>
-                {f.title}
-              </button>
-            </li>
-          ))}
-        </ol>
-      </div>
-
       <div className="panel">
         <h2 id="round-title">How a round flows</h2>
         <p className="lede">
@@ -108,6 +73,42 @@ export default function Round() {
           game is four rounds, at least sixteen hands.
         </p>
       </div>
+
+      <div className="stage">
+        <div className="stage-bar">
+          <p className="status">
+            Step {step + 1} of {FRAMES.length}: {frame.title}
+          </p>
+          <div className="stage-actions">
+            <button type="button" className="btn btn-quiet" onClick={() => setStep((s) => Math.max(0, s - 1))} aria-disabled={step === 0}>
+              Back
+            </button>
+            <button type="button" className="btn" onClick={() => setStep((s) => Math.min(last, s + 1))} aria-disabled={step === last}>
+              Next
+            </button>
+          </div>
+        </div>
+        <Table frame={frame} />
+        <p className="phase-blurb" aria-live="polite">
+          {frame.caption}
+        </p>
+        <ol className="steps" aria-label="Steps">
+          {FRAMES.map((f, i) => (
+            <li key={f.id}>
+              <button
+                type="button"
+                className={`step${i === step ? ' step-on' : ''}`}
+                aria-current={i === step ? 'step' : undefined}
+                onClick={() => setStep(i)}
+              >
+                <small>{i + 1}</small>
+                {f.title}
+              </button>
+            </li>
+          ))}
+        </ol>
+      </div>
+
     </section>
   )
 }

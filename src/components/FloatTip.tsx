@@ -17,7 +17,6 @@ export default function FloatTip({ title, subtitle, children, left, top, flipX }
     <div
       className={`float-tip${flipX ? ' float-tip-flip' : ''}`}
       style={{ left: `${left}%`, top: `${top}%` }}
-      role="status"
     >
       <strong>{title}</strong>
       {subtitle && <span className="float-tip-sub">{subtitle}</span>}

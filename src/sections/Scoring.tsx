@@ -104,10 +104,11 @@ function ScoreDrill() {
           type="button"
           className="btn"
           onClick={() => {
+            if (checked) return
             setChecked(true)
             track(missed.length === 0 && extra.length === 0 ? 'quiz/score/right' : 'quiz/score/wrong', ex.id)
           }}
-          disabled={checked}
+          aria-disabled={checked}
         >
           Check my count
         </button>
@@ -120,10 +121,6 @@ function ScoreDrill() {
 export default function Scoring() {
   return (
     <section className="lesson lesson-drill" aria-labelledby="scoring-title">
-      <div className="stage">
-        <ScoreDrill />
-      </div>
-
       <div className="panel">
         <h2 id="scoring-title">Scoring basics</h2>
         <p className="lede">
@@ -208,6 +205,11 @@ export default function Scoring() {
           seat number is worth more. They are left out of the exercise here to keep the counting clean.
         </p>
       </div>
+
+      <div className="stage">
+        <ScoreDrill />
+      </div>
+
     </section>
   )
 }

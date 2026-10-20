@@ -10,15 +10,15 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'The tiles' })).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: 'Red dragon' }).length).toBeGreaterThan(0)
 
-    await userEvent.click(screen.getByRole('tab', { name: /Sets and a winning hand/ }))
+    await userEvent.click(screen.getByRole('link', { name: /Sets and a winning hand/ }))
     expect(screen.getByRole('heading', { name: 'Sets and a winning hand' })).toBeInTheDocument()
 
-    await userEvent.click(screen.getByRole('tab', { name: /How a round flows/ }))
+    await userEvent.click(screen.getByRole('link', { name: /How a round flows/ }))
     expect(screen.getByText(/Step 1 of/)).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: 'Next' }))
     expect(screen.getByText(/Step 2 of/)).toBeInTheDocument()
 
-    await userEvent.click(screen.getByRole('tab', { name: /Glossary/ }))
+    await userEvent.click(screen.getByRole('link', { name: /Glossary/ }))
     expect(screen.getByRole('heading', { name: 'Glossary' })).toBeInTheDocument()
   })
 

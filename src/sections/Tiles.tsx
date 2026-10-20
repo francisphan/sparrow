@@ -91,6 +91,82 @@ export default function Tiles() {
 
   return (
     <section className="lesson" aria-labelledby="tiles-title">
+      <div className="panel">
+        <h2 id="tiles-title">The tiles</h2>
+        <p className="lede">
+          A set has 144 tiles. Most of them come in three <Term id="suit">suits</Term> numbered one to
+          nine, with four copies of each. The rest are winds, dragons, and a few bonus tiles.
+        </p>
+
+        <h3>Three suits</h3>
+        <p>
+          <strong>Characters</strong> show a Chinese numeral on top and the red character <span lang="zh-Hant">萬</span>{' '}
+          below. The numerals are worth learning once: <span lang="zh-Hant">一 二 三 四 五 六 七 八 九</span> is one to
+          nine. <strong>Dots</strong> and{' '}
+          <strong>bamboo</strong> you can simply count, except the one of bamboo, which is a bird.
+        </p>
+        <p>
+          Suits matter because only suit tiles have an order, and order is what makes a{' '}
+          <Term id="chow">chow</Term>. One, two, three of dots is a set. One of dots, two of bamboo, three
+          of characters is nothing.
+        </p>
+
+        <h3>Winds and dragons</h3>
+        <p>
+          The <Term id="honor">honors</Term> are the four winds, <span lang="zh-Hant">東 南 西 北</span> (east,
+          south, west, north), and the three dragons: red <span lang="zh-Hant">中</span>, green{' '}
+          <span lang="zh-Hant">發</span>, and white, which is a blank or a frame. They have no
+          number, so they only ever form pairs or sets of identical tiles. Three of the right wind, or three
+          of any dragon, score.
+        </p>
+
+        <h3>Flowers and seasons</h3>
+        <p>
+          Eight <Term id="bonus">bonus tiles</Term>, one of each. They never live in your hand: draw one, set
+          it aside face up, and take a replacement tile. They add a little to your score at the end. Some
+          variants leave them in the box.
+        </p>
+
+        <h3>Name that tile</h3>
+        <p className="hint">Corner hints are off here. Read the face.</p>
+        <div className="quiz">
+          <div className="quiz-tile">
+            <Tile id={q.tile} size={96} />
+          </div>
+          <div className="quiz-options" role="group" aria-label="Which tile is this?">
+            {q.options.map((id) => {
+              let cls = 'quiz-opt'
+              if (picked) {
+                if (id === q.tile) cls += ' quiz-opt-right'
+                else if (id === picked) cls += ' quiz-opt-wrong'
+                else cls += ' quiz-opt-dim'
+              }
+              return (
+                <button key={id} type="button" className={cls} onClick={() => answer(id)} disabled={!!picked}>
+                  {tileName(id)}
+                </button>
+              )
+            })}
+          </div>
+          <div className="quiz-foot">
+            <p className="status" role="status" aria-live="polite">
+              {picked === null ? (
+                `${score.right} of ${score.total} right${score.streak >= 3 ? `, ${score.streak} in a row` : ''}`
+              ) : picked === q.tile ? (
+                <span className="status-ok">Right. {note(q.tile)}</span>
+              ) : (
+                <span className="status-bad">
+                  Not quite: it is the {tileName(q.tile).toLowerCase()}. {note(q.tile)}
+                </span>
+              )}
+            </p>
+            <button type="button" className="btn" onClick={() => picked && next()} aria-disabled={!picked}>
+              Next tile
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="stage stage-tall">
         <div className="stage-bar">
           <p className="status">Hover, tap or tab to a tile to read it.</p>
@@ -145,82 +221,12 @@ export default function Tiles() {
               {note(active)}
             </FloatTip>
           )}
+          <p className="sr-only" role="status" aria-live="polite">
+            {active ? `${tileName(active)}. ${note(active)}` : ''}
+          </p>
         </div>
       </div>
 
-      <div className="panel">
-        <h2 id="tiles-title">The tiles</h2>
-        <p className="lede">
-          A set has 144 tiles. Most of them come in three <Term id="suit">suits</Term> numbered one to
-          nine, with four copies of each. The rest are winds, dragons, and a few bonus tiles.
-        </p>
-
-        <h3>Three suits</h3>
-        <p>
-          <strong>Characters</strong> show a Chinese numeral on top and the red character 萬 below. The
-          numerals are worth learning once: 一 二 三 四 五 六 七 八 九 is one to nine. <strong>Dots</strong> and{' '}
-          <strong>bamboo</strong> you can simply count, except the one of bamboo, which is a bird.
-        </p>
-        <p>
-          Suits matter because only suit tiles have an order, and order is what makes a{' '}
-          <Term id="chow">chow</Term>. One, two, three of dots is a set. One of dots, two of bamboo, three
-          of characters is nothing.
-        </p>
-
-        <h3>Winds and dragons</h3>
-        <p>
-          The <Term id="honor">honors</Term> are the four winds, 東 南 西 北 (east, south, west, north),
-          and the three dragons: red 中, green 發, and white, which is a blank or a frame. They have no
-          number, so they only ever form pairs or sets of identical tiles. Three of the right wind, or three
-          of any dragon, score.
-        </p>
-
-        <h3>Flowers and seasons</h3>
-        <p>
-          Eight <Term id="bonus">bonus tiles</Term>, one of each. They never live in your hand: draw one, set
-          it aside face up, and take a replacement tile. They add a little to your score at the end. Some
-          variants leave them in the box.
-        </p>
-
-        <h3>Name that tile</h3>
-        <p className="hint">Corner hints are off here. Read the face.</p>
-        <div className="quiz">
-          <div className="quiz-tile">
-            <Tile id={q.tile} size={96} />
-          </div>
-          <div className="quiz-options" role="group" aria-label="Which tile is this?">
-            {q.options.map((id) => {
-              let cls = 'quiz-opt'
-              if (picked) {
-                if (id === q.tile) cls += ' quiz-opt-right'
-                else if (id === picked) cls += ' quiz-opt-wrong'
-                else cls += ' quiz-opt-dim'
-              }
-              return (
-                <button key={id} type="button" className={cls} onClick={() => answer(id)} disabled={!!picked}>
-                  {tileName(id)}
-                </button>
-              )
-            })}
-          </div>
-          <div className="quiz-foot">
-            <p className="status" role="status" aria-live="polite">
-              {picked === null ? (
-                `${score.right} of ${score.total} right${score.streak >= 3 ? `, ${score.streak} in a row` : ''}`
-              ) : picked === q.tile ? (
-                <span className="status-ok">Right. {note(q.tile)}</span>
-              ) : (
-                <span className="status-bad">
-                  Not quite: it is the {tileName(q.tile).toLowerCase()}. {note(q.tile)}
-                </span>
-              )}
-            </p>
-            <button type="button" className="btn" onClick={next} disabled={!picked}>
-              Next tile
-            </button>
-          </div>
-        </div>
-      </div>
     </section>
   )
 }

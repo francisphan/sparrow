@@ -14,6 +14,8 @@ export default function Term({ id, children }: Props) {
   const [flip, setFlip] = useState(false)
   const wrap = useRef<HTMLSpanElement>(null)
   const tipId = useId()
+  // A tap focuses the button and then clicks it; the click must not undo what the focus just opened.
+  const focusedAt = useRef(0)
 
   function show() {
     const r = wrap.current?.getBoundingClientRect()
@@ -50,9 +52,16 @@ export default function Term({ id, children }: Props) {
         onPointerLeave={(e: PointerEvent) => {
           if (e.pointerType === 'mouse') setOpen(false)
         }}
-        onFocus={show}
+        onFocus={() => {
+          focusedAt.current = Date.now()
+          show()
+        }}
         onBlur={() => setOpen(false)}
-        onClick={() => (open ? setOpen(false) : show())}
+        onClick={() => {
+          if (Date.now() - focusedAt.current < 400) return
+          if (open) setOpen(false)
+          else show()
+        }}
       >
         {children ?? t.term.toLowerCase()}
       </button>
@@ -60,7 +69,11 @@ export default function Term({ id, children }: Props) {
         <span role="tooltip" id={tipId} className={`term-tip${flip ? ' term-tip-flip' : ''}`}>
           <strong>
             {t.term}
-            {t.chinese && <span className="term-cjk">{t.chinese}</span>}
+            {t.chinese && (
+              <span className="term-cjk" lang="zh-Hant">
+                {t.chinese}
+              </span>
+            )}
           </strong>
           <span>{t.short}</span>
         </span>
